@@ -1,7 +1,7 @@
 import logging
 import random
 
-from wilki.wilk import WilkThread, WilkProcess
+from wilk import WilkThread, WilkProcess
 
 
 class Menager():

@@ -4,11 +4,11 @@ from unittest.mock import patch
 
 import time
 
-from wilki.menager import MenagerThread
-from wilki.wilk import Wilk
-from wilki.menager import Menager
-from wilki.algorytm import Mapy
-from wilki.zaslepki import Wszechwiedzacy
+from menager import MenagerThread
+from wilk import Wilk
+from menager import Menager
+from algorytm import Mapy
+from zaslepki import Wszechwiedzacy
 
 global wszechwiedzacy, mapy, wybrana_mapa
 wszechwiedzacy = Wszechwiedzacy()

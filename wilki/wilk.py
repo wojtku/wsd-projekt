@@ -5,7 +5,7 @@ import threading
 import time
 from threading import Timer
 
-from wilki.algorytm import GreyWolfOptimizer
+from algorytm import GreyWolfOptimizer
 
 class Wilk():
     def __init__(self, id, x=None, y=None):
