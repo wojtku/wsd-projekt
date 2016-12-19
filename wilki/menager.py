@@ -5,8 +5,8 @@ from wilki.wilk import WilkThread, WilkProcess
 
 
 class Menager():
-    def __init__(self, liczba_wilkow, mapa=None, min_x=-2, min_y=-2, max_x=2, max_y=2, rozdzielczosc=100):
-        self.__init_mapa()
+    def __init__(self, liczba_wilkow, mapa=0, min_x=-2, min_y=-2, max_x=2, max_y=2, rozdzielczosc=100):
+        self._init_mapa(nr_mapy=mapa)
         self.liczba_wilkow = liczba_wilkow
         self.mapa = mapa
         self.min_x = min_x
@@ -15,7 +15,8 @@ class Menager():
         self.max_y = max_y
         self.rozdzielczosc = rozdzielczosc
 
-    def __init_mapa(self):
+    def _init_mapa(self, nr_mapy):
+        # TODO request do GPS'a i wizualizacji
         logging.debug("init_mapa")
 
     def _wylosuj_wspolrzedna(self, min, max):
@@ -29,6 +30,7 @@ class MenagerThread(Menager):
     def start(self):
         threads = [WilkThread(id=id, x=self._wylosuj_wspolrzedna(self.min_x, self.max_x),
                               y=self._wylosuj_wspolrzedna(self.min_y, self.max_y)) for id in range(self.liczba_wilkow)]
+
         for wilkthread in threads:
             wilkthread.start()
         for wilkthread in threads:
