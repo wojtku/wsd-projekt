@@ -29,7 +29,7 @@ const clearMap = () => {
 };
 
 const getWolvesLocation = () => {
-    /* Tu bêdzie pobieranie danych o lokalizacji z serwera
+    /* Tu bï¿½dzie pobieranie danych o lokalizacji z serwera
      * zamiast randoma */
 
     const wolf1 = new Wolf(getRandomX(), getRandomY());
@@ -38,6 +38,37 @@ const getWolvesLocation = () => {
     const wolf4 = new Wolf(getRandomX(), getRandomY());
     const wolf5 = new Wolf(getRandomX(), getRandomY());
     return [wolf1, wolf2, wolf3, wolf4, wolf5];
+};
+
+
+const fetchMap = (successCallback, errorCallback) => {
+    $.ajax({
+       url: "/api/map",
+       success: function(data) {
+           console.log("success fetching map");
+           successCallback(data);
+       },
+        error: function() {
+           console.error("Erorr while fetching map");
+            errorCallback();
+        }
+    });
+};
+
+const fetchWolvesLocation = (successCallback, errorCallback) => {
+    // api
+    $.ajax({
+        url: "/api/wolf",
+        success: function(data) {
+            console.log("success fetching wolves");
+            successCallback(data);
+        },
+        error: function() {
+            console.error("Erorr fetching wolves");
+            errorCallback();
+        }
+    });
+
 };
 
 const getRandomX = () => {
@@ -49,11 +80,18 @@ const getRandomY = () => {
 };
 
 const updatePosition = () => {
-    wolves = getWolvesLocation();
-    clearMap();
-    wolves.forEach(function(wolf) {
-        drawWolf(wolf);
+
+    // wolves = getWolvesLocation();
+
+    fetchWolvesLocation((wolves)=>{
+        clearMap();
+        wolves.forEach(function(wolf) {
+            drawWolf(wolf);
+        });
+    }, () => {
+        console.error("Cant get wolves");
     });
+
 };
 
 /* updatePosition every 2 seconds */
