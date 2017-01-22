@@ -29,9 +29,6 @@ const clearMap = () => {
 };
 
 const getWolvesLocation = () => {
-    /* Tu b�dzie pobieranie danych o lokalizacji z serwera
-     * zamiast randoma */
-
     const wolf1 = new Wolf(getRandomX(), getRandomY());
     const wolf2 = new Wolf(getRandomX(), getRandomY());
     const wolf3 = new Wolf(getRandomX(), getRandomY());
