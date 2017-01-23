@@ -25,7 +25,7 @@ def _wyslij_pozycje_mock(self):
     wszechwiedzacy.setWilk(self)
 
 
-def _jaka_wysokosc_mock(self):
+def _jaka_wysokosc_mock(self, x, y):
     return mapy.oblicz(numer_mapy=wybrana_mapa, x=self.x, y=self.y)
 
 
@@ -41,7 +41,9 @@ def _czolowka_mock(self):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+    # logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+
     patchery = [patch('__main__.Wilk._wyslij_pozycje', _wyslij_pozycje_mock),
                 patch('__main__.Wilk._jaka_wysokosc', _jaka_wysokosc_mock),
                 patch('__main__.Menager._init_mapa', _init_mapa_mock),
@@ -50,7 +52,7 @@ if __name__ == "__main__":
     for patch in patchery:
         patch.start()
 
-    menager = MenagerThread(liczba_wilkow=3)
+    menager = MenagerThread(liczba_wilkow=10)
     menager.start()
 
     for patch in patchery:

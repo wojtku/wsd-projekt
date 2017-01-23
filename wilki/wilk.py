@@ -12,14 +12,15 @@ class Wilk():
         self.id = id
         self.x = x
         self.y = y
-        self.h = self._jaka_wysokosc()
+        self.h = self._jaka_wysokosc(self.x, self.y)
+        self.gwo = None
         self._wyslij_pozycje()
         # poczekajmy az kazdy wilk zaraportuje
         Timer(0.001, self._czolowka).start()
 
         logging.debug("utworzono " + str(self))
 
-    def _jaka_wysokosc(self):
+    def _jaka_wysokosc(self, x, y):
         # TODO
         return 8848
 
@@ -56,12 +57,13 @@ class Wilk():
             self._czolowka()
             self.gwo = GreyWolfOptimizer(x=self.x, y=self.y, alfa=self.alfa,
                                          beta=self.beta, delta=self.delta, wilk=self)
-
-        for a in range(5):
+        # GLOWNA PETLA HASANIA
+        for a in range(15):
             self.x, self.y = self.gwo.krok()
+            self.h = self._jaka_wysokosc(self.x, self.y)
             logging.info('hasam krok' + str(a) + " " + str(self))
             self._wyslij_pozycje()
-            time.sleep(random.randint(2,5)/10)
+            # time.sleep(random.randint(2,5))
             self._czolowka()
             self.gwo.update(self.alfa, self.beta, self.delta)
 
@@ -75,6 +77,7 @@ class RownoleglyWilk(Wilk):
 
     def run(self):
         self.wio()
+        print("najwyższy szczyt: ", self.alfa.h)
 
 
 class WilkThread(RownoleglyWilk, threading.Thread):
