@@ -1,0 +1,14 @@
+rabbitmq setup: 
+
+#add user:
+sudo rabbitmqctl add_user wolf auuuuu
+
+#add vhost
+sudo rabbitmqctl add_vhost pack
+
+#set permissions for user
+sudo rabbitmqctl set_permissions bla bla bla read the docs
+
+
+#testing communication:
+launch main.py passing different names to constructors, then launch tmp.py that sends a message of choice to one of them

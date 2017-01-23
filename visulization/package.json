@@ -1,0 +1,15 @@
+{
+  "name": "http-wsd",
+  "version": "0.7.0",
+  "description": "Moduł styk - wizualizacja/komunikacja",
+  "main": "witamy.js",
+  "dependencies": {
+      "express": "*",
+      "body-parser": "^1.13.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ammar",
+  "license": "ISC"
+}
