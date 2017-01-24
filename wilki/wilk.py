@@ -4,6 +4,7 @@ import random
 import threading
 import time
 from threading import Timer
+import requests
 
 from algorytm import GreyWolfOptimizer
 
@@ -26,7 +27,8 @@ class Wilk():
 
     def _wyslij_pozycje(self):
         logging.debug(" ".join(["wysylam pozycje:", str(self.x), str(self.y)]))
-        # todo request http
+        requests.post('http://localhost:8080/api/wolf/' + str(self.id),
+                      json={'id': self.id, 'x': self.x, 'y': self.y, 'h': self.h, 'type': 'OMEGA'})
 
     def __kto_alfa(self):
         # todo
@@ -63,7 +65,7 @@ class Wilk():
             self.h = self._jaka_wysokosc(self.x, self.y)
             logging.info('hasam krok' + str(a) + " " + str(self))
             self._wyslij_pozycje()
-            # time.sleep(random.randint(2,5))
+            time.sleep(random.randint(1, 3))
             self._czolowka()
             self.gwo.update(self.alfa, self.beta, self.delta)
 

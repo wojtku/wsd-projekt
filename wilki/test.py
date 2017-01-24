@@ -1,6 +1,7 @@
 import logging
 from threading import Timer
 from unittest.mock import patch
+import requests
 
 import time
 
@@ -22,6 +23,8 @@ def _init_mapa_mock(self, nr_mapy):
 
 def _wyslij_pozycje_mock(self):
     logging.debug(" ".join([str(self.id), "wysylam pozycje: ", str(self.x), str(self.y)]))
+    requests.post('http://localhost:8080/api/wolf/' + str(self.id),
+                  json={'id': self.id, 'x': self.x, 'y': self.y, 'h': self.h, 'type': 'OMEGA'})
     wszechwiedzacy.setWilk(self)
 
 
