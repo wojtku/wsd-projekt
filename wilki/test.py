@@ -23,8 +23,11 @@ def _init_mapa_mock(self, nr_mapy):
 
 def _wyslij_pozycje_mock(self):
     logging.debug(" ".join([str(self.id), "wysylam pozycje: ", str(self.x), str(self.y)]))
-    requests.post('http://localhost:8080/api/wolf/' + str(self.id),
-                  json={'id': self.id, 'x': self.x, 'y': self.y, 'h': self.h, 'type': 'OMEGA'})
+    try:
+        requests.post('http://localhost:8080/api/wolf/' + str(self.id),
+                      json={'id': self.id, 'x': self.x, 'y': self.y, 'h': self.h, 'type': 'OMEGA'})
+    except Exception as e:
+        print('nie mogę wysłać pozycji do backendu wizualizacyjnego', e)
     wszechwiedzacy.setWilk(self)
 
 
