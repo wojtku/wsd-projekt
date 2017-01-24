@@ -17,8 +17,21 @@ class Wolf {
     }
 }
 
-const drawWolf = ({x,y}) => {
+const drawWolf = ({x,y, type}) => {
     context.beginPath();
+
+    if(type == "ALPHA") {
+        context.fillStyle="#FFFFFF";
+    } else if (type == "BETA") {
+        context.fillStyle="pink"
+    } else if (type == "DELTA") {
+        context.fillStyle="violet"
+    } else {
+        context.fillStyle="black";
+    }
+
+
+
     context.arc(x, y, pointSize, 0, Math.PI*2, true);
     context.closePath();
     context.fill();
