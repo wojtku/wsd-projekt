@@ -1,8 +1,8 @@
 const leftStart = 0;
 const topStart = 0;
-const leftEnd = 631;
-const topEnd = 404;
-const pointSize = 5;
+const leftEnd = 904;
+const topEnd = 492;
+const pointSize = 11;
 let wolves = [];
 
 const canvas = document.getElementById("myCanvas");
@@ -27,12 +27,13 @@ const drawWolf = ({x,y, type}) => {
     } else if (type == "DELTA") {
         context.fillStyle="violet"
     } else {
-        context.fillStyle="black";
+        context.fillStyle="yellow";
     }
 
 
-
-    context.arc(x, y, pointSize, 0, Math.PI*2, true);
+    console.log('Pozycja x: ' + x);
+    console.log('Pozycja y: ' + y);
+    context.arc(scaleXPosition(x), scaleYPosition(y), pointSize, 0, Math.PI*2, true);
     context.closePath();
     context.fill();
 };
@@ -68,7 +69,7 @@ const fetchMap = (successCallback, errorCallback) => {
 const fetchWolvesLocation = (successCallback, errorCallback) => {
     // api
     $.ajax({
-        url: "/api/wolf",
+        url: "http://localhost:8080/api/wolf",
         success: function(data) {
             console.log("success fetching wolves");
             successCallback(data);
@@ -82,18 +83,24 @@ const fetchWolvesLocation = (successCallback, errorCallback) => {
 };
 
 const getRandomX = () => {
-    return Math.floor(Math.random() * leftEnd) + leftStart;
+    //return Math.floor(Math.random() * leftEnd) + leftStart;
+    return -10;
 };
 
 const getRandomY = () => {
-    return Math.floor(Math.random() * topEnd) + topStart
+    //return Math.floor(Math.random() * topEnd) + topStart;
+    return 5;
 };
 
 const updatePosition = () => {
-
-    // wolves = getWolvesLocation();
-
-    fetchWolvesLocation((wolves)=>{
+    if(false) {
+        const wolves = getWolvesLocation();
+    clearMap();
+        wolves.forEach(function(wolf) {
+            drawWolf(wolf);
+        });
+    } else {
+        fetchWolvesLocation((wolves)=>{
         clearMap();
         wolves.forEach(function(wolf) {
             drawWolf(wolf);
@@ -101,10 +108,13 @@ const updatePosition = () => {
     }, () => {
         console.error("Cant get wolves");
     });
-
+    }
 };
+
+const scaleXPosition = (x) => (30.2*x + leftEnd/2);
+const scaleYPosition = (y) => (-16.4*y + topEnd/2);
 
 /* updatePosition every 2 seconds */
 window.setInterval(function(){
     updatePosition()
-}, 1000);
+}, 1200);

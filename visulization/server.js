@@ -118,6 +118,7 @@ router.route("/wolf/:id")
 router.post('/wolf', function(req, res) {
     console.log("POST WOLVES");
     wolves = req.body;
+    res.headers['Access-Control-Allow-Origin'] = '*';
     res.json({"status": "ok"});
 });
 
@@ -132,6 +133,7 @@ router.get('/wolf', function(req, res) {
         console.log("mocking mode: updating positions");
         wolves = updatePositions(wolves);
     }
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
     res.json(wolves);
 });
 
