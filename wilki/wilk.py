@@ -69,7 +69,7 @@ class Wilk():
             self.h = self._jaka_wysokosc(self.x, self.y)
             logging.info('hasam krok' + str(a) + " " + str(self))
             self._wyslij_pozycje()
-            time.sleep(random.randint(1, 3))
+            time.sleep(1)
             self._czolowka()
             self.gwo.update(self.alfa, self.beta, self.delta)
 

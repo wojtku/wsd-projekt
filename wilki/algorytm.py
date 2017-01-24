@@ -17,7 +17,6 @@ class GreyWolfOptimizer():
 
 
     def krok(self):
-        # todo
         self.A = random.uniform(-self.model_a, self.model_a)
         if abs(self.A) > 1:
             new_x, new_y = self.nowa_pozycja_gdy_atak()
