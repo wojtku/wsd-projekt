@@ -83,7 +83,7 @@ class RownoleglyWilk(Wilk):
 
     def run(self):
         self.wio()
-        print("najwyższy szczyt: ", self.alfa.h)
+        print("najwyższy szczyt: %f (x=%f,y= %f)" % (self.alfa.h, self.alfa.x, self.alfa.y))
 
 
 class WilkThread(RownoleglyWilk, threading.Thread):
